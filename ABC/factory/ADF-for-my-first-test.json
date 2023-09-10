@@ -1,0 +1,9 @@
+{
+	"name": "ADF-for-my-first-test",
+	"location": "eastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3e199b82-2ad8-491c-9d32-58db981fce19",
+		"tenantId": "de08c407-19b9-427d-9fe8-edf254300ca7"
+	}
+}

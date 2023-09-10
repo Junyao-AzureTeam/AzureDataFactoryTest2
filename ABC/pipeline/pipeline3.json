@@ -1,0 +1,33 @@
+{
+	"name": "pipeline3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://adb-7042317886038844.4.azuredatabricks.net/api/2.0/pipelines/864b2d04-f6ee-48ca-ae5f-372cc03ee0ed/updates",
+					"method": "POST",
+					"headers": {
+						"Authorization": "Bearer dapi2b2d552f240562041b7b9d46dfdc2ade-2"
+					},
+					"body": {
+						"test": 1
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-09-08T06:07:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

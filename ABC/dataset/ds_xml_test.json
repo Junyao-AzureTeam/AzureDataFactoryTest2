@@ -1,0 +1,19 @@
+{
+	"name": "ds_xml_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "testxml.xml",
+				"container": "temp"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

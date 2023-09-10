@@ -1,0 +1,76 @@
+{
+	"name": "pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data new",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "XmlSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "XmlReadSettings",
+							"validationMode": "none",
+							"namespaces": true
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"value": "@json('{\n            \"type\": \"TabularTranslator\",\n            \"mappings\": [\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''LEFT''][0][''Order''][''Product''][''@supplierCode'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"supplierCode\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Product''][''@productCode'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"productCode\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Prescription''][''Personalization''][''@length'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"length\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Prescription''][''Prism''][''@mode'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"mode\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Prescription''][''@sphere'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"sphere\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Prescription''][''@addition'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"addition\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Name''][''@trueorfalse'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"trueorfalse\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Name''][''@minCenter'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"minCenter\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Name''][''@forcedBase'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"forcedBase\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''Name''][''@Diameter'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"Diameter\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''Order''][''customer'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"customer\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''OrderAddendum''][''FreeBlank''][''@blankFrontRadius'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"blankFrontRadius\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''OrderAddendum''][''FreeBlank''][''@blankBackRadius'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"blankBackRadius\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''OrderAddendum''][''FreeBlank''][''@blankDiameter'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"blankDiameter\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''OrderAddendum''][''FreeBlank''][''@blankCenterThickness'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"blankCenterThickness\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''Right''][0][''OrderAddendum''][''FreeBlank''][''@materialIndex'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"materialIndex\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''@calculation'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"calculation\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''@country'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"@@country\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''@identification'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"identification\"\n                    }\n                },\n                {\n                    \"source\": {\n                        \"path\": \"$[''Job''][''@calculatorEngine'']\"\n                    },\n                    \"sink\": {\n                        \"name\": \"calculatorEngine\"\n                    }\n                }\n            ]\n        }')",
+						"type": "Expression"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_xml_test",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"test": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"abc": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-09-08T02:32:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
